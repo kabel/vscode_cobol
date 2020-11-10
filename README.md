@@ -331,6 +331,34 @@ Things to consider:
   - If you want the extension to understand the contents of your copybook before you access it, then turn on the ```coboleditor.parse_copybooks_for_references``` settings (json array) to allow the extension to look inside the copybook references
 
 
+### COBOL Linter
+
+The COBOL linter included with the extension performs two functions, the first function is to identify sections/paragraphs that are not used and the second is to apply any "house" standards.
+
+The section/parapgraph linter by default generates warning message but if you prefer the messages to be marked as information, you change the ```coboleditor.linter_mark_as_information``` boolean setting, for example:
+
+ ```json
+ "coboleditor.linter_mark_as_information": true
+ ```
+
+The house standards are applied to fields in various sections, each section is named and a rule defined as a regular expression to enforce.
+
+For example to enforce all working-storage items must start with ws and local-storage ls, you can use:
+
+```json
+"coboleditor.linter_house_standards_rules": [
+        "file=.*",
+        "thread-local=ls.*",
+        "working-storage=ws.*",
+        "object-storage=.*",
+        "local-storage=.*",
+        "linkage=.*",
+        "communication=.*",
+        "report=.*",
+        "screen=.*",
+    ]
+```
+
 ## Complementary extensions
 
 ### [ToDo tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) by Gruntfuggly
