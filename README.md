@@ -326,9 +326,9 @@ Visual Studio Code workspaces are not "projects" but do allow you keep your sour
 
 Things to consider:
 
- - If you have copybooks, you should change the ```coboleditor.copybookdirs``` setting to setup where the extension can find your copybooks
-  - If use the *COPY* verb with this extension, you may also need to adjust the ```coboleditor.copybookexts``` setting
-  - If you want the extension to understand the contents of your copybook before you access it, then turn on the ```coboleditor.parse_copybooks_for_references``` setting to allow the extension to look inside the copybook references
+ - If you have copybooks, you should change the ```coboleditor.copybookdirs``` settings to setup where the extension can find your copybooks
+  - If use the *COPY* verb with this extension, you may also need to adjust the ```coboleditor.copybookexts``` settings (json array).
+  - If you want the extension to understand the contents of your copybook before you access it, then turn on the ```coboleditor.parse_copybooks_for_references``` settings (json array) to allow the extension to look inside the copybook references
 
 
 ## Complementary extensions
@@ -375,7 +375,7 @@ Although this extension does not understand comments in COBOL source files, it c
 
 ## coboleditor.fileformat
 
-When ```coboleditor.margin``` is enabled extension will look for "sourceformat" settings in the header of the source file itself.
+When ```coboleditor.margin``` is enabled extension will look for "sourceformat" settings (json array) in the header of the source file itself.
 
 However, if you need to tell the extension which file are which particular format, this can be achieved with ```coboleditor.fileformat``` property.
 
@@ -396,7 +396,7 @@ For example, if you want all the files that match ```A*.cbl``` to be fixed and e
 
 ## Handling code pages
 
-The defaults embedded in the extension can be overwritten by either changing sessions at the user level in the settings json or more efficiently, you change it just for the "COBOL" files.
+The defaults embedded in the extension can be overwritten by either changing sessions at the user level in the settings json file or more efficiently, you change it just for the "COBOL" files.
 
 For example, to ensure you use utf8 for all you files use:
 
@@ -415,7 +415,7 @@ Currently I have only one is active experimental feature and this is "hover" sup
 
 This currently includes most of the *Micro Focus COBOL Library API* (CBL_) and a subset of ILE date APIs.
 
-This can be activated by setting the flag ```coboleditor.experimental_features``` in the settings panel.
+This can be activated by setting the flag ```coboleditor.experimental_features``` in the preferences -> settings panel.
 
 and looks like:
 
