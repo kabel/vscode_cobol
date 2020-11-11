@@ -373,7 +373,7 @@ For example:
 
 ```json
     "coboleditor.cache_metadata": "workspace"
-```    
+```
 
 If the user wants to specific where the metdata caching directory is to be located, the the ```user_defined_directory``` can be used, this will also require the user to set the ```coboleditor.cache_metadata_user_directory``` setting to point to the location on disk.
 
@@ -381,8 +381,8 @@ For example:
 
 ```json
     "coboleditor.cache_metadata": "user_defined_directory",
-    "coboleditor.cache_metadata_user_directory : "${HOME}/vscode_cache"
-```    
+    "coboleditor.cache_metadata_user_directory : "${HOME}/.vscode_cobol"
+```
 
 In the above example, the environment variable HOME is expanded, on Windows ${HOME} is replaced with ${USERPROFILE} to allow a workspace to be portable between Windows, Linux and Mac OSX.
 
@@ -390,7 +390,7 @@ The creation of the directory is left to developer, as specific permissions on t
 
 ### Metadata caching "storagepath" setting
 
-In some versions of the extension the ```coboleditor.cache_metadata``` had a ```storagepath``` option.   This option would store the metadata in an area located for the extension by vscode itself.    
+In some versions of the extension the ```coboleditor.cache_metadata``` had a ```storagepath``` option.   This option would store the metadata in an area located for the extension by vscode itself.
 
 This at first seemed a reason thing todo but overtime issues with disk space creep and shared permissions on directories in hosted environments came to light and as the average user will not want to look inside vscode storagepath area to maintain the disk space or correct the permissions it was decided to removed it in favour of the above documented mechanisms.
 

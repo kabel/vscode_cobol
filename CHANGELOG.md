@@ -12,6 +12,18 @@ Changelog for spgennard vscode_cobol.
 [0179c56c6b5001e](https://github.com/spgennard/vscode_cobol/commit/0179c56c6b5001e) *2020-11-10 23:55:03*
 
 
+### GitHub [#243](https://github.com/spgennard/vscode_cobol/issues/243) Issue with metadata in storagepath  
+
+**Issue with metadata in storagepath Fix #243**
+
+ * In order resolve the storage creep and permissions issues with the 
+ * use of storagepath, the hard decision to remove it and been done. 
+ * - remove storagepath and repace it with user_defined_directory 
+ * more work/testing to be done before it is released 
+
+[688204568aa904d](https://github.com/spgennard/vscode_cobol/commit/688204568aa904d) *2020-11-11 18:48:11*
+
+
 ## 6.9.20
 ### GitHub [#229](https://github.com/spgennard/vscode_cobol/issues/229) add acucobol-listing  
 

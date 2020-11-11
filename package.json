@@ -250,11 +250,11 @@
                         "Do not do any caching"
                     ]
                 },
-                "coboleditor.cache_metadata_user_directory" : {
-                    "type" : "string",
-                    "markdownDescription": "User specific directory for the workspace metadata cache",
-                    "title": "User specific directory for the workspace metadata cache",
-                    "default" : ""
+                "coboleditor.cache_metadata_user_directory": {
+                    "type": "string",
+                    "markdownDescription": "User specific directory for the workspace metadata cache (directory has to exist)",
+                    "title": "User specific directory for the workspace metadata cache (directory has to exist)",
+                    "default": "${HOME}/.vscode_cobol"
                 },
                 "coboleditor.cache_metadata_time_limit": {
                     "type": "number",
