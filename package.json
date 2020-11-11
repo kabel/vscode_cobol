@@ -2,7 +2,7 @@
     "name": "cobol",
     "displayName": "COBOL",
     "description": "IntelliSense, highlighting, snippets and more for COBOL, JCL, PL/I & DIR and HLASM",
-    "version": "6.10.3",
+    "version": "6.10.4",
     "publisher": "bitlang",
     "keywords": [
         "cobol",
@@ -254,7 +254,7 @@
                     "type": "string",
                     "markdownDescription": "User specific directory for the workspace metadata cache (directory has to exist)",
                     "title": "User specific directory for the workspace metadata cache (directory has to exist)",
-                    "default": "${HOME}/.vscode_cobol"
+                    "default": ""
                 },
                 "coboleditor.cache_metadata_time_limit": {
                     "type": "number",

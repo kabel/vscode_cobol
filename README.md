@@ -361,32 +361,55 @@ For example to enforce all working-storage items must start with ws and local-st
 
 ### Metadata caching location
 
+#### Recommend use
+
 By default the metadata caching is turned off but it can be turned on via the ```coboleditor.cache_metadata``` setting.
 
 This setting, allows you to specific where the metdata caching files are stored.
 
-The recommendation setting for the metadata caching is the ```workspace``` option.   This setting creates a .vscode_cobol directory that contains all the metadata files within the workspace.
+The recommendation setting for the metadata caching is the ```workspace``` option.   This setting creates a .vscode_cobol directory that contains all the metadata files within the workspace folder.
 
 This directory should be excluded from source code control system.
 
-For example:
+Example configuration:
 
 ```json
     "coboleditor.cache_metadata": "workspace"
 ```
 
-If the user wants to specific where the metdata caching directory is to be located, the the ```user_defined_directory``` can be used, this will also require the user to set the ```coboleditor.cache_metadata_user_directory``` setting to point to the location on disk.
+#### Advanced use
+
+If the user wants to specific where the metdata caching directory is to be located, the ```user_defined_directory``` setting can be used.
+
+The user will also be required to set the ```coboleditor.cache_metadata_user_directory``` setting to point to the directory on disk.
+
+Each workspace is required to be in a seperate directory.
+
+The user should avoid using a network based directory, as this will adversely affect performance.
 
 For example:
-
 ```json
     "coboleditor.cache_metadata": "user_defined_directory",
-    "coboleditor.cache_metadata_user_directory : "${HOME}/.vscode_cobol"
+    "coboleditor.cache_metadata_user_directory" : "${HOME}/.vscode_cobol/myworkspace"
+```
+
+Remember to create the directory structure, for example, on Linux:
+
+```bash
+mkdir $HOME/.vscode_cobol
+mkdir $HOME/.vscode_cobol/myworkspace
+```
+
+and Windows:
+
+```dos
+mkdir %USERPROFILE%\.vscode_cobol
+mkdir %USERPROFILE%\.vscode_cobol\myworkspace
 ```
 
 In the above example, the environment variable HOME is expanded, on Windows ${HOME} is replaced with ${USERPROFILE} to allow a workspace to be portable between Windows, Linux and Mac OSX.
 
-The creation of the directory is left to developer, as specific permissions on the directory may be required.
+NOTE: The creation of the directory is left to developer, as specific permissions on the directory may be required.
 
 ### Metadata caching "storagepath" setting
 
