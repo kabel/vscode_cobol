@@ -3,6 +3,15 @@
 
 Changelog for spgennard vscode_cobol.
 
+## Unreleased
+### GitHub [#216](https://github.com/spgennard/vscode_cobol/issues/216) How to disable a single entry (ideally only for a specific source) from being shown in the problem pane?  
+
+**Start to include docs for linter - Fix #216**
+
+
+[0179c56c6b5001e](https://github.com/spgennard/vscode_cobol/commit/0179c56c6b5001e) *2020-11-10 23:55:03*
+
+
 ## 6.9.20
 ### GitHub [#229](https://github.com/spgennard/vscode_cobol/issues/229) add acucobol-listing  
 

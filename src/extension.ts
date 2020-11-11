@@ -609,7 +609,7 @@ export function activate(context: ExtensionContext): void {
         if (cacheDirectory !== undefined) {
             COBOLSourceScannerUtils.dumpMetaData(settings, cacheDirectory);
         } else {
-            logMessage("Metadata caching is turned off");
+            logMessage("Metadata caching is turned off (or invalid)");
         }
     });
 
@@ -618,7 +618,7 @@ export function activate(context: ExtensionContext): void {
         if (cacheDirectory !== undefined) {
             VSCOBOLSourceScanner.clearMetaData(settings, cacheDirectory);
         } else {
-            logMessage("Metadata caching is turned off");
+            logMessage("Metadata caching is turned off (or invalid)");
 
         }
     });

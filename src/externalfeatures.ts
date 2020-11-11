@@ -23,7 +23,7 @@ export enum ESourceFormat {
 
 export enum CacheDirectoryStrategy {
     Workspace = "workspace",
-    Storage = "storagepath",
+    UserDefinedDirectory = "user_defined_directory",
     Off = "off"
 }
 

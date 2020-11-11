@@ -5,10 +5,8 @@ import { GlobalCachesHelper } from "./globalcachehelper";
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as os from 'os';
-import * as crypto from 'crypto';
 
-import { logMessage, logException, logTimedMessage, isDirectory, performance_now, getCurrentContext, logChannelSetPreserveFocus, ExternalFeatures } from "./extension";
+import { logMessage, logException, logTimedMessage, isDirectory, performance_now, logChannelSetPreserveFocus, ExternalFeatures } from "./extension";
 import { VSCOBOLConfiguration } from "./configuration";
 import { getWorkspaceFolders } from "./cobolfolders";
 import { ICOBOLSettings } from "./iconfiguration";
@@ -133,9 +131,9 @@ export default class VSCOBOLSourceScanner {
 
                 if (InMemoryCache.size > VSCOBOLSourceScanner.MAX_MEM_CACHE_SIZE) {
                     // drop the smallest..
-                    let smallest=Number.MAX_VALUE;
+                    let smallest = Number.MAX_VALUE;
                     let dropKey = "";
-                    for(const [key,val] of InMemoryCache) {
+                    for (const [key, val] of InMemoryCache) {
                         if (val.tokensInOrder.length < smallest) {
                             dropKey = key;
                             smallest = val.tokensInOrder.length;
@@ -203,7 +201,7 @@ export default class VSCOBOLSourceScanner {
         return;
     }
 
-    public static async howManyCopyBooksInDirectory(directory: string, settings:ICOBOLSettings): Promise<number> {
+    public static async howManyCopyBooksInDirectory(directory: string, settings: ICOBOLSettings): Promise<number> {
         const folder = Uri.file(directory);
         const entries = await workspace.fs.readDirectory(folder);
         let copyBookCount = 0;
@@ -211,7 +209,7 @@ export default class VSCOBOLSourceScanner {
             switch (fileType) {
                 case FileType.File | FileType.SymbolicLink:
                 case FileType.File:
-                    if (COBOLFileUtils.isValidCopybookExtension(entry,settings)) {
+                    if (COBOLFileUtils.isValidCopybookExtension(entry, settings)) {
                         copyBookCount++;
                     }
 
@@ -268,36 +266,6 @@ export default class VSCOBOLSourceScanner {
         });
     }
 
-    static readonly username = os.userInfo().username;
-
-    private static getStoragePathArea(settings: ICOBOLSettings): string | undefined {
-        const storagePath = getCurrentContext().storageUri?.fsPath;
-        if (storagePath === undefined) {
-            return undefined;
-        }
-
-        let storageid = settings.storagearea_id;
-        if (storageid.length === 0) {
-            storageid = crypto.randomBytes(16).toString("hex");
-            workspace.getConfiguration("coboleditor").update("storagearea_id", storageid);
-
-            // cleanup old storage area
-            VSCOBOLSourceScanner.wipeCacheDirectory(storagePath);
-            logMessage(" Rebuild of metadata cache is required due to moving to storagearea");
-            logMessage("  cache into subdirectory to allow multi-workspace caching.");
-        }
-
-        const storagePathPlusUser = path.join(storagePath,VSCOBOLSourceScanner.username);
-        if (!fs.existsSync(storagePathPlusUser)) {
-            fs.mkdirSync(storagePathPlusUser);
-        }
-        const completePath = path.join(storagePathPlusUser, storageid);
-        if (!fs.existsSync(completePath)) {
-            fs.mkdirSync(completePath);
-        }
-        return completePath;
-    }
-
     public static getCacheDirectory(): string | undefined {
 
         const settings = VSCOBOLConfiguration.get();
@@ -309,21 +277,12 @@ export default class VSCOBOLSourceScanner {
 
         if (getWorkspaceFolders()) {
 
-            if (settings.cache_metadata === CacheDirectoryStrategy.Storage) {
-                const storageDirectory: string | undefined = VSCOBOLSourceScanner.getStoragePathArea(settings);
+            if (settings.cache_metadata === CacheDirectoryStrategy.UserDefinedDirectory) {
+                const storageDirectory: string | undefined = VSCOBOLSourceScanner.getUserStorageDirectory(settings);
 
                 /* no storage directory */
                 if (storageDirectory === undefined) {
                     return undefined;
-                }
-
-                if (!isDirectory(storageDirectory)) {
-                    try {
-                        fs.mkdirSync(storageDirectory);
-                    }
-                    catch {
-                        // swallow
-                    }
                 }
 
                 /* not a directory, so ignore */
@@ -366,5 +325,24 @@ export default class VSCOBOLSourceScanner {
         }
 
         return undefined;
+    }
+
+    static getUserStorageDirectory(settings: ICOBOLSettings): string | undefined {
+        let str = settings.cache_metadata_user_directory;
+        if (str === null || str.length === 0) {
+            return undefined;
+        }
+        
+        // if on Windows replace ${HOME} with ${USERPROFILE}
+        if (COBOLFileUtils.isWin32) {
+            str = str.replace(/\$\{HOME\}/,'${USERPROFILE}');
+        }
+        
+        const replaced = str.replace(/\$\{([^%]+)\}/g, (_original, matched) => {
+            const r = process.env[matched];
+            return r ? r : ''
+        });
+
+        return replaced;
     }
 }

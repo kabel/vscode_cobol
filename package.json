@@ -238,7 +238,7 @@
                 "coboleditor.cache_metadata": {
                     "enum": [
                         "workspace",
-                        "storagepath",
+                        "user_defined_directory",
                         "off"
                     ],
                     "default": "off",
@@ -246,15 +246,15 @@
                     "title": "Cache directory location",
                     "enumDescriptions": [
                         "Cache directory in workspace",
-                        "Use extension storage path",
+                        "User Defined Directory",
                         "Do not do any caching"
                     ]
                 },
-                "coboleditor.storagearea_id": {
-                    "type": "string",
-                    "markdownDescription": "storagearea identifier for cache (auto-generated if not set)",
-                    "title": "storagearea identifier for cache (auto-generated if not set)",
-                    "default": ""
+                "coboleditor.cache_metadata_user_directory" : {
+                    "type" : "string",
+                    "markdownDescription": "User specific directory for the workspace metadata cache",
+                    "title": "User specific directory for the workspace metadata cache",
+                    "default" : ""
                 },
                 "coboleditor.cache_metadata_time_limit": {
                     "type": "number",

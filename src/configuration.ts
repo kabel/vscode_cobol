@@ -50,7 +50,7 @@ export class VSCOBOLConfiguration {
         vsconfig.process_scanner_hints_embedded_in_comments = getBoolean("process_scanner_hints_embedded_in_comments", false);
         vsconfig.process_scanner_hint_token_for_source_dependancies = getProcess_scanner_hint_token_for_source_dependancies();
         vsconfig.process_metadata_cache_on_file_save = getBoolean("process_metadata_cache_on_file_save", false);
-        vsconfig.storagearea_id = getString("storagearea_id", "");
+        vsconfig.cache_metadata_user_directory = getString("cache_metadata_user_directory", "");
         vsconfig.editor_maxTokenizationLineLength = workspace.getConfiguration('editor').get<number>("maxTokenizationLineLength",20000);
         vsconfig.sourceview = getBoolean("sourceview", false);
         vsconfig.sourceview_include_jcl_files = getBoolean("sourceview_include_jcl_files", true);
@@ -141,7 +141,7 @@ function getcache_metadata(): CacheDirectoryStrategy {
 
     switch (cacheDirStrategy) {
         case 'workspace': return CacheDirectoryStrategy.Workspace;
-        case 'storagepath': return CacheDirectoryStrategy.Storage;
+        case 'user_defined_directory': return CacheDirectoryStrategy.UserDefinedDirectory;
         case 'off': return CacheDirectoryStrategy.Off;
     }
     return CacheDirectoryStrategy.Off;
