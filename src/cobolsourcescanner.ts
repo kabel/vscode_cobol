@@ -1931,7 +1931,7 @@ export default class COBOLSourceScanner implements ICommentCallback, ICOBOLSourc
 
             // only enable scanner hint when process_scanner_hints_embedded_in_comments is set
             if (this.configHandler.process_scanner_hints_embedded_in_comments) {
-                const startOfTokenFor = this.configHandler.process_scanner_hint_token_for_source_dependancies;
+                const startOfTokenFor = this.configHandler.process_scanner_hint_token_for_source_dependencies;
 
                 const startOfSourceDepIndex: number = commentLine.indexOf(startOfTokenFor);
                 if (startOfSourceDepIndex !== -1) {
