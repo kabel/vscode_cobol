@@ -97,8 +97,8 @@
         "workspaceContains:**/.jcl"
     ],
     "main": "./dist/extension",
-    "license": "MIT",
-    "homepage": "https://github.com/spgennard/vscode_cobol",
+    "license": "CC-BY-NC-ND-4.0",
+    "homepage": "https://github.com/spgennard/vscode_cobol_extension",
     "author": {
         "name": "Stephen Gennard",
         "email": "stephen@gennard.net"

@@ -4,6 +4,14 @@
 Changelog for spgennard vscode_cobol.
 
 ## Unreleased
+### GitHub [#208](https://github.com/spgennard/vscode_cobol/issues/208) Feature Request: Add config setting to allow finding definitions in _any_ workspace file  
+
+**fix typo - Related to: #208**
+
+
+[f0919d29daf1cd2](https://github.com/spgennard/vscode_cobol/commit/f0919d29daf1cd2) *2020-11-11 21:57:58*
+
+
 ### GitHub [#216](https://github.com/spgennard/vscode_cobol/issues/216) How to disable a single entry (ideally only for a specific source) from being shown in the problem pane?  
 
 **Start to include docs for linter - Fix #216**
@@ -13,6 +21,16 @@ Changelog for spgennard vscode_cobol.
 
 
 ### GitHub [#243](https://github.com/spgennard/vscode_cobol/issues/243) Issue with metadata in storagepath  
+
+**Prepare for a delivery - Fix #243**
+
+
+[7d468af08ea04e3](https://github.com/spgennard/vscode_cobol/commit/7d468af08ea04e3) *2020-11-11 21:45:00*
+
+**Add default user directory - Fix #243**
+
+
+[3dc99734a1471c3](https://github.com/spgennard/vscode_cobol/commit/3dc99734a1471c3) *2020-11-11 20:56:29*
 
 **Issue with metadata in storagepath Fix #243**
 
