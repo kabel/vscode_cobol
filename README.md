@@ -21,27 +21,27 @@ Everywhere Visual Studio Code works.
 
 ## Code colorization for COBOL, PL/I and JCL:
 
- ![sieve_jcl](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/screenshot_three.png)
+ ![sieve_jcl](images/screenshot_three.png)
 
 ## IntelliSense example:
 
-![perform_add](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/perform_add.gif)
+![perform_add](images/perform_add.gif)
 
 ## Breadcrumb support:
 
-![breadcrumbs](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/breadcrumb.png)
+![breadcrumbs](images/breadcrumb.png)
 
 ## Outline support:
 
-![outline](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/outline.png)
+![outline](images/outline.png)
 
 ## Go to definition:
 
-![gotodef](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/gotodef.gif)
+![gotodef](images/gotodef.gif)
 
 ## Peek definition:
 
-![peekdef](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/peekdef.gif)
+![peekdef](images/peekdef.gif)
 
 ## Keybinds
 
@@ -505,7 +505,7 @@ This can be activated by setting the flag ```coboleditor.experimental_features``
 
 and looks like:
 
- ![hover](https://raw.githubusercontent.com/spgennard/vscode_cobol_extension/master/images/hover.png)
+ ![hover](images/hover.png)
 
 ## Scanning and caching
 
