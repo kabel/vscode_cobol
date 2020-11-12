@@ -14,7 +14,6 @@
         "visualcobol",
         "serverexpress",
         "ocds",
-        "gnucobol",
         "opencobol",
         "cobol-it",
         "cobolit",
@@ -705,11 +704,6 @@
                 "configuration": "./cobol.configuration.json"
             },
             {
-                "id": "COBOL_GNU_LISTFILE",
-                "extensions": [],
-                "configuration": "./cobol.configuration.json"
-            },
-            {
                 "id": "COBOL_PCOB_LISTFILE",
                 "extensions": [],
                 "configuration": "./cobol.configuration.json"
@@ -734,16 +728,6 @@
                 ],
                 "extensions": [],
                 "configuration": "./opencobol.configuration.json"
-            },
-            {
-                "id": "GnuCOBOL",
-                "aliases": [
-                    "GnuCOBOL",
-                    "gnucobol",
-                    "COBOL-IT"
-                ],
-                "extensions": [],
-                "configuration": "./gnucobol.configuration.json"
             },
             {
                 "id": "JCL",
@@ -867,15 +851,6 @@
                 }
             },
             {
-                "language": "COBOL_GNU_LISTFILE",
-                "scopeName": "source.cobol_gnu_listfile",
-                "path": "./syntaxes/COBOL_gnu_listfile.tmLanguage.json",
-                "embeddedLanguages": {
-                    "meta.embedded.block.sql": "sql",
-                    "meta.embedded.block.html": "html"
-                }
-            },
-            {
                 "language": "COBOL_ACU_LISTFILE",
                 "scopeName": "source.cobol_acu_listfile",
                 "path": "./syntaxes/COBOL_acu_listfile.tmLanguage.json",
@@ -906,11 +881,6 @@
                 "language": "OpenCOBOL",
                 "scopeName": "source.opencobol",
                 "path": "./syntaxes/OpenCOBOL.tmLanguage.json"
-            },
-            {
-                "language": "GnuCOBOL",
-                "scopeName": "source.gnucobol",
-                "path": "./syntaxes/GnuCOBOL.tmLanguage.json"
             },
             {
                 "language": "JCL",
@@ -1591,48 +1561,6 @@
                 "message": 4
             },
             {
-                "name": "gnucobol-cobc",
-                "regexp": "^(.*): ?(\\d+): ([eE]rror|[wW]arning): ([^[]*)(\\[(.*)\\])?$",
-                "file": 1,
-                "line": 2,
-                "severity": 3,
-                "message": 4,
-                "code": 6
-            },
-            {
-                "name": "gnucobol3-cobc",
-                "regexp": "^(.*): ?(\\d+): (error|warning): ([^[]*)(\\[(.*)\\])?$",
-                "file": 1,
-                "line": 2,
-                "severity": 3,
-                "message": 4,
-                "code": 6
-            },
-            {
-                "name": "gnucobol-warning-cobc",
-                "regexp": "^(.*): ?(\\d+): ([wW]arning|[wW]arnung|[wW]aarschuwing|[aA]lerta|avertissement|упозорење): ([^[]*)(\\[(.*)\\])?$",
-                "file": 1,
-                "line": 2,
-                "message": 4,
-                "code": 6
-            },
-            {
-                "name": "gnucobol-error-cobc",
-                "regexp": "^(.*): ?(\\d+): *([eE]rror|[fF]ehler|[fF]out||[eE]rrores|[eE]rrores|erreur|грешка): ([^[]*)(\\[(.*)\\])?$",
-                "file": 1,
-                "line": 2,
-                "message": 4,
-                "code": 6
-            },
-            {
-                "name": "gnucobol3-note-cobc",
-                "regexp": "^(.*): ?(\\d+): ([nN]ote|Anmerkung|[nN]ota): ([^[]*)(\\[(.*)\\])?$",
-                "file": 1,
-                "line": 2,
-                "message": 4,
-                "code": 6
-            },
-            {
                 "name": "acucobol-ccbl",
                 "regexp": "^(.*),\\sline\\s(\\d+):\\s(.*)$",
                 "file": 1,
@@ -1787,54 +1715,6 @@
                 ],
                 "pattern": "$mfcobol-errformat2-basefn",
                 "source": "VC"
-            },
-            {
-                "name": "gnucobol-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$gnucobol-cobc",
-                "source": "GnuCOBOL1+2"
-            },
-            {
-                "name": "gnucobol3-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$gnucobol3-cobc",
-                "source": "GnuCOBOL3"
-            },
-            {
-                "name": "gnucobol3-warning-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$gnucobol-warning-cobc",
-                "severity": "warning",
-                "source": "GnuCOBOL3"
-            },
-            {
-                "name": "gnucobol3-error-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$gnucobol-error-cobc",
-                "severity": "error",
-                "source": "GnuCOBOL3"
-            },
-            {
-                "name": "gnucobol3-note-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$gnucobol3-note-cobc",
-                "severity": "info",
-                "source": "GnuCOBOL3"
             },
             {
                 "name": "opencobol-cobc",
