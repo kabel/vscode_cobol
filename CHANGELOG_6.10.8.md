@@ -1,6 +1,6 @@
 # COBOL Extension for Visual Studio Code
 
-## Changes: 6.10.4
+## Changes: 6.10.4-8
 
 Breaking change:
 

@@ -138,6 +138,10 @@ const terminalName = "UnitTest";
 const blessed_extensions: string[] = [
     "bitlang.cobol",
     "HCLTechnologies.hclappscancodesweep",      // code scanner
+];
+
+const known_problem_extensions: string[] = [
+    "OlegKunitsyn.gnucobol-debug",              // debugger
     "BroadcomMFD.debugger-for-mainframe",       // debugger
     "rechinformatica.rech-cobol-debugger",      // debugger
     "BroadcomMFD.ccf"                           // control flow extension
@@ -145,25 +149,32 @@ const blessed_extensions: string[] = [
 
 function checkForExtensionConflicts(settings: ICOBOLSettings): string {
     let dupExtensionMessage = "";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let grab_info_for_ext: vscode.Extension<any> | undefined = undefined;
+    let reason = "";
 
     for (const ext of extensions.all) {
         if (ext !== undefined && ext.packageJSON !== undefined) {
             if (ext.packageJSON.id !== undefined) {
-                let isOkay = false;
+                let okay2Continue = false;
                 for (const blessed_extension of blessed_extensions) {
                     if (blessed_extension === ext.packageJSON.id) {
-                        isOkay = true;
+                        okay2Continue= true;
                     }
                 }
-                if (isOkay) {
+                for (const known_problem_extension of known_problem_extensions) {
+                    if (known_problem_extension === ext.packageJSON.id) {
+                        grab_info_for_ext=ext;
+                        reason = "debugger support is problematic with this extension";
+                        okay2Continue = true;
+                    }
+                }
+                if (okay2Continue) {
                     continue;
                 }
             }
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        let grab_info_for_ext: vscode.Extension<any> | undefined = undefined;
-        let reason = "";
 
         if (ext.packageJSON.contributes !== undefined) {
             const grammarsBody = ext.packageJSON.contributes.grammars;
@@ -254,7 +265,7 @@ function initExtensionSearchPaths(config: ICOBOLSettings) {
     checkForExtensionConflictsMessage = checkForExtensionConflicts(config);
     if (checkForExtensionConflictsMessage.length !== 0 && config.ignore_unsafe_extensions === false && messageBoxDone === false) {
         messageBoxDone = true;
-        window.showInformationMessage("COBOL Extension that has found duplicate functionality\n\nSee View->Output->COBOL for more information", { modal: true });
+        window.showInformationMessage("COBOL Extension that has found duplicate or conflicting functionality\n\nSee View->Output->COBOL for more information", { modal: true });
     }
 
     fileSearchDirectory.length = 0;
