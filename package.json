@@ -2,7 +2,7 @@
     "name": "cobol",
     "displayName": "COBOL",
     "description": "IntelliSense, highlighting, snippets and more for COBOL, JCL, PL/I & DIR and HLASM",
-    "version": "6.10.9",
+    "version": "6.10.10",
     "publisher": "bitlang",
     "keywords": [
         "cobol",
@@ -96,7 +96,7 @@
     ],
     "main": "./dist/extension",
     "license": "SEE LICENSE IN LICENSE",
-    "homepage": "https://github.com/spgennard/vscode_cobol_extension",
+    "homepage": "https://github.com/spgennard/vscode_cobol",
     "author": {
         "name": "Stephen Gennard",
         "email": "stephen@gennard.net"
