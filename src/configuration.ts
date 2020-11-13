@@ -47,8 +47,8 @@ export class VSCOBOLConfiguration {
         vsconfig.linter_mark_as_information = getBoolean("linter_mark_as_information", true);
         vsconfig.ignore_unsafe_extensions = getBoolean("ignore_unsafe_extensions", false);
         vsconfig.coboldoc_workspace_folder = getCoboldoc_workspace_folder();
-        vsconfig.process_scanner_hints_embedded_in_comments = getBoolean("process_scanner_hints_embedded_in_comments", false);
-        vsconfig.process_scanner_hint_token_for_source_dependencies = getprocess_scanner_hint_token_for_source_dependencies();
+        vsconfig.scan_comments_for_hints = getBoolean("scan_comments_for_hints", false);
+        vsconfig.scan_comment_copybook_token = getscan_comment_copybook_token();
         vsconfig.process_metadata_cache_on_file_save = getBoolean("process_metadata_cache_on_file_save", false);
         vsconfig.cache_metadata_user_directory = getString("cache_metadata_user_directory", "");
         vsconfig.editor_maxTokenizationLineLength = workspace.getConfiguration('editor').get<number>("maxTokenizationLineLength",20000);
@@ -148,9 +148,9 @@ function getcache_metadata(): CacheDirectoryStrategy {
 }
 
 
-function getprocess_scanner_hint_token_for_source_dependencies(): string {
+function getscan_comment_copybook_token(): string {
     const editorConfig = workspace.getConfiguration('coboleditor');
-    let hintToken = editorConfig.get<string>('process_scanner_hint_token_for_source_dependencies');
+    let hintToken = editorConfig.get<string>('scan_comment_copybook_token');
     if (hintToken === undefined || hintToken === null) {
         hintToken = "source-dependency";
     }

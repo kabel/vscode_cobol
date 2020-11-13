@@ -76,7 +76,7 @@ export class CobolLinterProvider {
 
     public async updateLinter(document: vscode.TextDocument): Promise<void> {
 
-        if (this.settings.linter === false && this.settings.process_scanner_hints_embedded_in_comments === false) {
+        if (this.settings.linter === false && this.settings.scan_comments_for_hints === false) {
             this.collection.clear();
             return;
         }

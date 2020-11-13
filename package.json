@@ -539,14 +539,14 @@
                     "description": "Turn off unsafe extension check",
                     "default": false
                 },
-                "coboleditor.process_scanner_hints_embedded_in_comments": {
+                "coboleditor.scan_comments_for_hints": {
                     "type": "boolean",
-                    "title": "Process scanner hints embedded in comments",
+                    "description": "Process scanner hints embedded in comments",
                     "default": false
                 },
-                "coboleditor.process_scanner_hint_token_for_source_dependencies": {
+                "coboleditor.scan_comment_copybook_token": {
                     "type": "string",
-                    "title": "Comment token used for processing source code dependancies",
+                    "description" : "Comment token used for processing source code dependancies, for example extra copybooks",
                     "default": "source-dependency"
                 },
                 "coboleditor.process_metadata_cache_on_file_save": {

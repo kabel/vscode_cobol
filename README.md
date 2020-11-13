@@ -43,7 +43,7 @@ Everywhere Visual Studio Code works.
 
 ![peekdef](https://raw.githubusercontent.com/spgennard/vscode_cobol/master/images/peekdef.gif)
 
-## Keybinds
+## Keybindings
 
 | Keys                     |                          Description                            |
 |--------------------------|:---------------------------------------------------------------:|
@@ -171,18 +171,17 @@ For Net Express/Server Express compilers use the "$mfcobol-errformat2-netx-sx" p
 }
 ```
 
-### Task: Single file compile using GnuCOBOL/OpenCOBOL/COBOL-IT
+### Task: Single file compile using COBOL-IT
 
 The example below shows you how you can create a single task to compile one program using the `cobc` command.
 
-This example is for GnuCOBOL 1-2.x, for GnuCOBOL use $gnucobol3-cob
 
 ```json
 {
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "gnucobol - cobc (single file)",
+            "label": "cobolit - cobc (single file)",
             "type": "shell",
             "command": "cobc",
             "args": [
@@ -191,7 +190,7 @@ This example is for GnuCOBOL 1-2.x, for GnuCOBOL use $gnucobol3-cob
                 "-I${workspaceFolder}\\CopyBooks\\Public",
                 "${file}"
             ],
-            "problemMatcher" : "$gnucobol-cobc"
+            "problemMatcher" : "$cobolit-cobc"
         }
     ]
 }
@@ -233,12 +232,7 @@ The example below shows you how you can create a single task to compile one prog
 |-----------------------------------------------|------------------------------------------------------------------|------------------------------------------------------------------------|
 | COBOL-IT                                      | *cobc*                                                           | $cobolit-cobc                                                          |
 | COBOL-IT                                      | *cobc* for errors/notes                                          | $cobolit-error-cobc + $cobolit-note-cobc                               |
-| open-cobol 1-1.5                              | *cobc*                                                           | $opencobol-cobc                                                        |
-| open-cobol 1-1.5                              | *cobc* for warnings/errors/notes                                 | $opencobol-warning-cobc + $opencobol-error-cobc + $opencobol-note-cobc |
 | ACU-COBOLGT                                   | *ccbl* for errors/warnings                                       | $acucobol-ccbl + $acucobol-warning-ccbl                                |
-| GnuCOBOL 1-2                                  | *cobc*                                                           | $gnucobol-cobc                                                         |
-| GnuCOBOL 3                                    | *cobc*                                                           | $gnucobol3-cobc                                                        |
-| GnuCOBOL 3                                    | *cobc* for warnings/errors/notes                                 | $gnucobol3-warning-cobc + $gnucobol3-error-cobc + $gnucobol3-note-cobc |
 | Micro Focus COBOL Net Express/Server Express  | *cob* or *cobol.exe* + ERRFORMAT"2"                              | $mfcobol-errformat2-netx-sx                                            |
 |                                               | *cob* or *cobol.exe* + ERRFORMAT"2" for errors in copybooks      | +mfcobol-errformat2-copybook-netx-sx                                   |
 |                                               | *cob* or *cobol.exe* + ERRFORMAT"3"                              | $mfcobol-errformat3-netx-sx                                            |
@@ -417,6 +411,32 @@ In some versions of the extension the ```coboleditor.cache_metadata``` had a ```
 
 This at first seemed a reason thing todo but overtime issues with disk space creep and shared permissions on directories in hosted environments came to light and as the average user will not want to look inside vscode storagepath area to maintain the disk space or correct the permissions it was decided to removed it in favour of the above documented mechanisms.
 
+## Pre-Processor support for "hidden" source code
+
+Some pre-processor reference copybooks that are inserted into the code without using standard COBOL syntax.
+
+These source files are often difficult to edit due this extension not knowing anything about these files.
+
+In order to help this extension, a special style of comment can be inserted into the code that allows the extension to locate these extra copybooks.
+
+For example, if your preprocessor includes the files ```Shared/foo.cbl OldCopyBooks/Shared/bar.cbl```, then you can use the following comment line.
+
+```cobol
+*> @source-dependency Shared/foo.cbl OldCopyBooks/Shared/bar.cbl
+````
+
+The source-dependency names are separated by a space.
+
+To enable this feature enable the ```scan_comments_for_hints``` setting, for example:
+
+```json
+"coboleditor.scan_comments_for_hints": true
+```
+
+The hint token can be configured by the ```coboleditor.scan_comment_copybook_token``` setting, which has the default value set to ```source-dependency```.
+
+It is recommended that the token name remain consistent in your source, otherwise it will make it hard for observers of your source to understand the code.
+
 ## Complementary extensions
 
 ### [ToDo tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) by Gruntfuggly
@@ -530,14 +550,12 @@ The command "COBOL: Clear metadata" can be used to remove the on-disk cache.
 - Online communities
   - [Facebook COBOL Group](https://www.facebook.com/groups/COBOLProgrammers/)
    - [Micro Focus COBOL Community](https://community.microfocus.com/t5/Application-Modernization/ct-p/COBOL)
-   - [GnuCOBOL Community](https://sourceforge.net/p/gnucobol/discussion/)
    - [Open Mainframe Project - COBOL Forum](https://community.openmainframeproject.org/c/cobol-technical-questions)
    - [Tek-Tips - COBOL General discussion](https://www.tek-tips.com/threadminder.cfm?pid=209)
  - Stack Overflow topics/tags:
    - [Micro Focus COBOL, PL/I, REXX, JCL and CICS](https://stackoverflow.com/questions/tagged/microfocus)
    - [ACUCOBOL-GT](https://stackoverflow.com/questions/tagged/acucobol-gt)
    - [COBOL](https://stackoverflow.com/questions/tagged/cobol)
-   - [GnuCOBOL](https://stackoverflow.com/questions/tagged/gnucobol)
    - [COBOL.NET](https://stackoverflow.com/questions/tagged/cobol.net)
    - [CICS](https://stackoverflow.com/questions/tagged/cics)
  - [COBOL Programming Language Articles on Reddit](https://www.reddit.com/r/cobol/)
@@ -550,11 +568,9 @@ The command "COBOL: Clear metadata" can be used to remove the on-disk cache.
 
 ## Shortcuts
 
-
  - [ALT] + [SHIFT] + [C]: Change to COBOL Syntax (default)
  - [ALT] + [SHIFT] + [A]: Change to ACUCOBOL-GT Syntax
  - [ALT] + [SHIFT] + [O]: Change to OpenCOBOL Syntax
- - [ALT] + [SHIFT] + [G]: Change to GnuCOBOL Syntax
  - [ALT] + [SHIFT] + [M]: Toggle margins (overrides user/workspace settings)
 
 ## Contributors

@@ -42,9 +42,9 @@ export interface ICOBOLSettings {
     linter_house_standards_rules: string[];
     ignore_unsafe_extensions: boolean;
     coboldoc_workspace_folder: string;
-    process_scanner_hints_embedded_in_comments:boolean;
+    scan_comments_for_hints:boolean;
     cache_metadata_show_progress_messages: boolean;
-    process_scanner_hint_token_for_source_dependencies: string;
+    scan_comment_copybook_token: string;
     process_metadata_cache_on_file_save: boolean;
     cache_metadata_user_directory: string;
     sourceview: boolean;
@@ -93,8 +93,8 @@ export class COBOLSettings implements ICOBOLSettings {
     public ignore_unsafe_extensions: boolean;
     public coboldoc_workspace_folder: string;
     public program_extensions: string[];
-    public process_scanner_hints_embedded_in_comments: boolean;
-    public process_scanner_hint_token_for_source_dependencies: string;
+    public scan_comments_for_hints: boolean;
+    public scan_comment_copybook_token: string;
     public cache_metadata_show_progress_messages:boolean;
     public process_metadata_cache_on_file_save: boolean;
     public cache_metadata_user_directory: string;
@@ -144,8 +144,8 @@ export class COBOLSettings implements ICOBOLSettings {
         this.linter_house_standards = true;
         this.linter_house_standards_rules = [];
         this.ignore_unsafe_extensions = false;
-        this.process_scanner_hints_embedded_in_comments = false;
-        this.process_scanner_hint_token_for_source_dependencies = "source-dependency";
+        this.scan_comments_for_hints = false;
+        this.scan_comment_copybook_token = "source-dependency";
         this.coboldoc_workspace_folder = "coboldoc";
         this.process_metadata_cache_on_file_save = false;
         this.cache_metadata_user_directory = "";
