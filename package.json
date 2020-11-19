@@ -2,7 +2,7 @@
     "name": "cobol",
     "displayName": "COBOL",
     "description": "IntelliSense, highlighting, snippets and more for COBOL, JCL, PL/I & DIR and HLASM",
-    "version": "6.10.12",
+    "version": "6.10.21",
     "publisher": "bitlang",
     "keywords": [
         "cobol",
@@ -14,7 +14,6 @@
         "visualcobol",
         "serverexpress",
         "ocds",
-        "opencobol",
         "cobol-it",
         "cobolit",
         "entcobol",
@@ -47,7 +46,6 @@
         "onLanguage:cobol",
         "onLanguage:COBOL",
         "onLanguage:ACUCOBOL",
-        "onLanguage:OpenCOBOL",
         "onLanguage:GnuCOBOL",
         "onLanguage:entcobol",
         "onLanguage:JCL",
@@ -63,8 +61,6 @@
         "onCommand:cobolplugin.revtab",
         "onCommand:cobolplugin.change_lang_to_acu",
         "onCommand:cobolplugin.change_lang_to_cobol",
-        "onCommand:cobolplugin.change_lang_to_opencobol",
-        "onCommand:cobolplugin.change_lang_to_gnucobol",
         "onCommand:cobolplugin.toggle_margin",
         "onCommand:cobolplugin.change_source_format",
         "onCommand:cobolplugin.dumpMetaData",
@@ -435,7 +431,7 @@
                 "coboleditor.mfunit.diagnostic.color": {
                     "type": "boolean",
                     "title": "Enable ANSI color",
-                    "description": "Enable ANSI color when using mfunit in terminal",
+                    "description": "Enable ANSI color when using the Micro Focus Unit Testing Framework (mfunit) in terminal",
                     "default": true
                 },
                 "coboleditor.disable_unc_copybooks_directories": {
@@ -546,7 +542,7 @@
                 },
                 "coboleditor.scan_comment_copybook_token": {
                     "type": "string",
-                    "description" : "Comment token used for processing source code dependancies, for example extra copybooks",
+                    "description": "Comment token used for processing source code dependencies, for example extra copybooks",
                     "default": "source-dependency"
                 },
                 "coboleditor.process_metadata_cache_on_file_save": {
@@ -596,20 +592,6 @@
                 ],
                 "editor.detectIndentation": false,
                 "editor.wordSeparators": "`~!#$%^&*()=+[{]}\\|;:'\",.<>/?"
-            },
-            "[OpenCOBOL]": {
-                "editor.insertSpaces": true,
-                "editor.renderIndentGuides": false,
-                "files.autoGuessEncoding": false,
-                "editor.formatOnType": false,
-                "editor.autoIndent": "full",
-                "editor.rulers": [
-                    6,
-                    7,
-                    72
-                ],
-                "editor.detectIndentation": false,
-                "editor.wordSeparators": "`~!@#$%^&*()=+[{]}\\|;:'\",.<>/?-"
             },
             "[dir]": {
                 "editor.insertSpaces": true,
@@ -721,15 +703,6 @@
                 "configuration": "./cobol.configuration.json"
             },
             {
-                "id": "OpenCOBOL",
-                "aliases": [
-                    "OpenCOBOL",
-                    "opencobol"
-                ],
-                "extensions": [],
-                "configuration": "./opencobol.configuration.json"
-            },
-            {
                 "id": "JCL",
                 "extensions": [
                     ".jcl",
@@ -829,7 +802,8 @@
                 "path": "./syntaxes/COBOL.tmLanguage.json",
                 "embeddedLanguages": {
                     "meta.embedded.block.sql": "sql",
-                    "meta.embedded.block.html": "html"
+                    "meta.embedded.block.html": "html",
+                    "meta.embedded.block.java": "java"
                 }
             },
             {
@@ -876,11 +850,6 @@
                     "meta.embedded.block.sql": "sql",
                     "meta.embedded.block.html": "html"
                 }
-            },
-            {
-                "language": "OpenCOBOL",
-                "scopeName": "source.opencobol",
-                "path": "./syntaxes/OpenCOBOL.tmLanguage.json"
             },
             {
                 "language": "JCL",
@@ -982,32 +951,38 @@
             {
                 "command": "cobolplugin.checkWorkspaceForMissingCopybookDirs",
                 "category": "COBOL",
-                "title": "Check workspace folders recursively for potential copybook directories"
+                "title": "Check workspace folders recursively for potential copybook directories",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.processAllFilesInWorkspace",
                 "category": "COBOL",
-                "title": "Process files in workspace for metadata"
+                "title": "Process files in workspace for metadata",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.dumpMetaData",
                 "category": "COBOL",
-                "title": "Dump metadata for diagnostic"
+                "title": "Dump metadata for diagnostic",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.clearMetaData",
                 "category": "COBOL",
-                "title": "Clear metadata"
+                "title": "Clear metadata",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.syntaxCheck",
                 "category": "COBOL",
-                "title": "Compile: Syntax Check"
+                "title": "Compile: Syntax Check",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.mfurunMenu",
                 "category": "COBOL",
-                "title": "Run UnitTest"
+                "title": "Run UnitTest",
+                "enablement": "!isWeb"
             },
             {
                 "command": "cobolplugin.removeAllComments",
@@ -1169,11 +1144,6 @@
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
             },
             {
-                "key": "ctrl+k ctrl+j",
-                "command": "cobolplugin.move2pd",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
-            },
-            {
                 "key": "ctrl+alt+p",
                 "command": "cobolplugin.move2pd",
                 "when": "editorTextFocus && editorLangId == COBOL"
@@ -1182,11 +1152,6 @@
                 "key": "ctrl+alt+p",
                 "command": "cobolplugin.move2pd",
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
-            },
-            {
-                "key": "ctrl+alt+p",
-                "command": "cobolplugin.move2pd",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
             },
             {
                 "key": "ctrl+alt+p",
@@ -1206,11 +1171,6 @@
             {
                 "key": "ctrl+alt+w",
                 "command": "cobolplugin.move2ws",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
-            },
-            {
-                "key": "ctrl+alt+w",
-                "command": "cobolplugin.move2ws",
                 "when": "editorTextFocus && editorLangId == GnuCOBOL"
             },
             {
@@ -1226,11 +1186,6 @@
             {
                 "key": "ctrl+alt+d",
                 "command": "cobolplugin.move2dd",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
-            },
-            {
-                "key": "ctrl+alt+d",
-                "command": "cobolplugin.move2dd",
                 "when": "editorTextFocus && editorLangId == GnuCOBOL"
             },
             {
@@ -1246,22 +1201,12 @@
             {
                 "key": "ctrl+alt+.",
                 "command": "cobolplugin.move2anyforward",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
-            },
-            {
-                "key": "ctrl+alt+.",
-                "command": "cobolplugin.move2anyforward",
                 "when": "editorTextFocus && editorLangId == GnuCOBOL"
             },
             {
                 "key": "ctrl+alt+,",
                 "command": "cobolplugin.move2anybackwards",
                 "when": "editorTextFocus && editorLangId == GnuCOBOL"
-            },
-            {
-                "key": "ctrl+alt+,",
-                "command": "cobolplugin.move2anybackwards",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
             },
             {
                 "key": "ctrl+alt+.",
@@ -1304,16 +1249,6 @@
                 "when": "editorLangId == GnuCOBOL && !inSnippetMode"
             },
             {
-                "key": "tab",
-                "command": "cobolplugin.tab",
-                "when": "editorLangId == OpenCOBOL && !inSnippetMode"
-            },
-            {
-                "key": "shift+tab",
-                "command": "cobolplugin.revtab",
-                "when": "editorLangId == OpenCOBOL && !inSnippetMode"
-            },
-            {
                 "key": "ctrl+/",
                 "command": "cobolplugin.commentline",
                 "when": "editorTextFocus && editorLangId == COBOL"
@@ -1324,59 +1259,19 @@
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
             },
             {
-                "key": "ctrl+/",
-                "command": "cobolplugin.commentline",
-                "when": "editorTextFocus && editorLangId == OpenCOBOL"
-            },
-            {
                 "key": "alt+shift+a",
                 "command": "cobolplugin.change_lang_to_acu",
                 "when": "editorLangId == COBOL && !inSnippetMode"
             },
             {
-                "key": "alt+shift+a",
-                "command": "cobolplugin.change_lang_to_acu",
-                "when": "editorLangId == OpenCOBOL && !inSnippetMode"
-            },
-            {
                 "key": "alt+shift+c",
                 "command": "cobolplugin.change_lang_to_cobol",
-                "when": "editorLangId == ACUCOBOL && !inSnippetMode"
-            },
-            {
-                "key": "alt+shift+c",
-                "command": "cobolplugin.change_lang_to_cobol",
-                "when": "editorLangId == OpenCOBOL && !inSnippetMode"
-            },
-            {
-                "key": "alt+shift+o",
-                "command": "cobolplugin.change_lang_to_opencobol",
-                "when": "editorLangId == COBOL && !inSnippetMode"
-            },
-            {
-                "key": "alt+shift+o",
-                "command": "cobolplugin.change_lang_to_opencobol",
                 "when": "editorLangId == ACUCOBOL && !inSnippetMode"
             },
             {
                 "key": "alt+shift+m",
                 "command": "cobolplugin.toggle_margin",
                 "when": "editorTextFocus && editorLangId == COBOL"
-            },
-            {
-                "key": "alt+shift+g",
-                "command": "cobolplugin.change_lang_to_gnucobol",
-                "when": "editorLangId == OpenCOBOL && !inSnippetMode"
-            },
-            {
-                "key": "alt+shift+g",
-                "command": "cobolplugin.change_lang_to_gnucobol",
-                "when": "editorLangId == COBOL && !inSnippetMode"
-            },
-            {
-                "key": "alt+shift+g",
-                "command": "cobolplugin.change_lang_to_gnucobol",
-                "when": "editorLangId == ACUCOBOL && !inSnippetMode"
             }
         ],
         "snippets": [
@@ -1386,10 +1281,6 @@
             },
             {
                 "language": "ACUCOBOL",
-                "path": "./snippets/cobol.json"
-            },
-            {
-                "language": "OpenCOBOL",
                 "path": "./snippets/cobol.json"
             },
             {
@@ -1522,28 +1413,6 @@
                 "column": 3,
                 "code": 4,
                 "message": 6
-            },
-            {
-                "name": "opencobol-cobc",
-                "regexp": "^(.*):(\\d+):\\s([eE]rror|[wW]arning):\\s(.*)$",
-                "file": 1,
-                "line": 2,
-                "severity": 3,
-                "message": 4
-            },
-            {
-                "name": "opencobol-error-cobc",
-                "regexp": "^(.*):(\\d+): ([eE]rror|[fF]ehler|[eE]rrores|[eE]rrores):\\s(.*)$",
-                "file": 1,
-                "line": 2,
-                "message": 4
-            },
-            {
-                "name": "opencobol-warning-cobc",
-                "regexp": "^(.*):(\\d+): ([wW]arning|[wW]arnung|[aA]lerta):\\s(.*)$",
-                "file": 1,
-                "line": 2,
-                "message": 4
             },
             {
                 "name": "cobolit-cobc",
@@ -1717,35 +1586,6 @@
                 "source": "VC"
             },
             {
-                "name": "opencobol-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$opencobol-cobc",
-                "source": "OpenCOBOL"
-            },
-            {
-                "name": "opencobol-warning-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$opencobol-warning-cobc",
-                "severity": "warning",
-                "source": "OpenCOBOL"
-            },
-            {
-                "name": "opencobol-error-cobc",
-                "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
-                "pattern": "$opencobol-error-cobc",
-                "severity": "error",
-                "source": "OpenCOBOL"
-            },
-            {
                 "name": "cobolit-cobc",
                 "owner": "cobol",
                 "fileLocation": [
@@ -1809,11 +1649,11 @@
         "@types/glob": "^7.1.3",
         "@types/minimatch": "^3.0.3",
         "@types/mocha": "^8.0.3",
-        "@types/node": "^14.14.6",
+        "@types/node": "^14.14.7",
         "@types/vscode": "^1.49.0",
-        "@typescript-eslint/eslint-plugin": "^4.6.1",
-        "@typescript-eslint/parser": "^4.6.1",
-        "depcheck": "^1.2.0",
+        "@typescript-eslint/eslint-plugin": "^4.8.0",
+        "@typescript-eslint/parser": "^4.8.0",
+        "depcheck": "^1.3.1",
         "eslint": "^7.13.0",
         "glob": "^7.1.6",
         "mocha": "^8.2.1",
@@ -1828,7 +1668,7 @@
         "@types/uuid": "^8.3.0",
         "lzjs": "1.3.0",
         "minimatch": "^3.0.4",
-        "n-readlines": "^1.0.0",
+        "n-readlines": "^1.0.1",
         "node-html-parser": "^1.4.8",
         "performance-now": "2.1.0",
         "properties-reader": "^2.1.1",
