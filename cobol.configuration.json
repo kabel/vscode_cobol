@@ -18,12 +18,48 @@
 		[
 			"'",
 			"'"
+		],
+		[
+			"if",
+			"end-if"
+		],
+		[
+			"call",
+			"end-call"
+		],
+		[
+			"evaluate",
+			"end-evaluate"
+		],
+		[
+			"perform",
+			"end-perform"
+		],
+		[
+			"string",
+			"end-string"
+		],
+		[
+			"unstring",
+			"end-unstring"
+		],
+		[
+			"compute",
+			"end-compute"
+		],
+		[
+			"$if",
+			"$end"
 		]
 	],
 	"autoClosingPairs": [
 		{
 			"open": "[",
-			"close": "]"
+			"close": "]",
+			"notIn": [
+				"string",
+				"comment"
+			]
 		},
 		{
 			"open": "(",

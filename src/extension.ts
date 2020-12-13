@@ -46,6 +46,7 @@ import { CachedCOBOLSourceDefinition } from './cachedsourcedefinitionprovider';
 import { ESourceFormat } from './externalfeatures';
 import { VSExternalFeatures } from './vsexternalfeatures';
 import { VSCobScanner } from './vscobscanner';
+import { BldScriptTaskProvider } from './bldTaskProvider';
 
 let formatStatusBarItem: StatusBarItem;
 export const progressStatusBarItem: StatusBarItem = window.createStatusBarItem(StatusBarAlignment.Left);
@@ -55,6 +56,8 @@ const COBOLOutputChannel: OutputChannel = window.createOutputChannel("COBOL");
 
 let sourceTreeView: SourceViewTree | undefined = undefined;
 let sourceTreeWatcher: vscode.FileSystemWatcher | undefined = undefined;
+
+let bldscriptTaskProvider: vscode.Disposable | undefined;
 
 export const ExternalFeatures = new VSExternalFeatures();
 
@@ -359,10 +362,14 @@ function activateLogChannelAndPaths(hide: boolean, settings: ICOBOLSettings) {
         logMessage(` Extension path    : ${thisExtension.extensionPath}`);
         logMessage(` Version           : ${thisExtension.packageJSON.version}`);
         logMessage(" Caching");
-        logMessage(`  Cache Strategy               : ${settings.cache_metadata}`);
-        logMessage(`  Cache directory              : ${VSCOBOLSourceScanner.getCacheDirectory()}`);
-        logMessage(` UNC paths disabled            : ${settings.disable_unc_copybooks_directories}`);
-        logMessage(` Parse copybook for references : ${settings.parse_copybooks_for_references}`);
+        logMessage(`  Cache Strategy   : ${settings.cache_metadata}`);
+        const cacheDir = VSCOBOLSourceScanner.getCacheDirectory();
+        if (cacheDir !== undefined) {
+            logMessage(`  Cache directory  : ${cacheDir}`);
+        }
+        logMessage(` UNC paths disabled               : ${settings.disable_unc_copybooks_directories}`);
+        logMessage(` Parse copybook for references    : ${settings.parse_copybooks_for_references}`);
+        logMessage(` Editor maxTokenizationLineLength : ${settings.editor_maxTokenizationLineLength}`)
     }
 
     initExtensionSearchPaths(settings);
@@ -400,10 +407,6 @@ export function getCurrentContext(): ExtensionContext {
     return currentContext;
 }
 
-function isGnuCOBOLLanguagePresent(): boolean {
-    return extensions.getExtension("bitlang.gnucobol") !== undefined;
-}
-
 function flip_plaintext(doc: TextDocument) {
     if (doc.languageId === 'plaintext' || doc.languageId === 'tsql') {  // one tsql ext grabs .lst!
         const lcount = doc.lineCount;
@@ -419,17 +422,6 @@ function flip_plaintext(doc: TextDocument) {
             //NOTE: If we have more.. refactor..
             if (firstLine.startsWith("Pro*COBOL: Release")) {
                 vscode.languages.setTextDocumentLanguage(doc, "COBOL_PCOB_LISTFILE");
-                return;
-            }
-
-            if (firstLine.startsWith("GnuCOBOL ")) {
-                if (isGnuCOBOLLanguagePresent()) {
-                    vscode.languages.setTextDocumentLanguage(doc, "COBOL_GNU_LISTFILE");
-                } else {
-                    logMessage(" Current source file has been detected as a 'GnuCOBOL' listing file but");
-                    logMessage("  the extension that provides 'GnuCOBOL' support is not present (bitlang.gnucobol)");
-                    logMessage("  install this extension if you want colorisation in the source file");
-                }
                 return;
             }
 
@@ -622,7 +614,6 @@ export function activate(context: ExtensionContext): void {
             VSCOBOLSourceScanner.clearMetaData(settings, cacheDirectory);
         } else {
             logMessage("Metadata caching is turned off (or invalid)");
-
         }
     });
 
@@ -1082,6 +1073,8 @@ export function activate(context: ExtensionContext): void {
         logMessage(checkForExtensionConflictsMessage);
     }
 
+    bldscriptTaskProvider = vscode.tasks.registerTaskProvider(BldScriptTaskProvider.BldScriptType, new BldScriptTaskProvider());
+
     openChangeLog();
 
     if (VSCOBOLConfiguration.get().process_metadata_cache_on_start) {
@@ -1129,6 +1122,9 @@ function openChangeLog(): void {
     }
 }
 export async function deactivate(): Promise<void> {
+    if (bldscriptTaskProvider) {
+        bldscriptTaskProvider.dispose();
+    }
     await deactivateAsync();
 }
 

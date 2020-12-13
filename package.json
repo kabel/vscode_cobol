@@ -2,7 +2,7 @@
     "name": "cobol",
     "displayName": "COBOL",
     "description": "IntelliSense, highlighting, snippets and more for COBOL, JCL, PL/I & DIR and HLASM",
-    "version": "6.10.21",
+    "version": "6.11.9",
     "publisher": "bitlang",
     "keywords": [
         "cobol",
@@ -29,7 +29,7 @@
         "email": "stephen@gennard.net"
     },
     "engines": {
-        "vscode": "^1.49.0"
+        "vscode": "^1.51.0"
     },
     "extensionKind": [
         "workspace"
@@ -46,7 +46,6 @@
         "onLanguage:cobol",
         "onLanguage:COBOL",
         "onLanguage:ACUCOBOL",
-        "onLanguage:GnuCOBOL",
         "onLanguage:entcobol",
         "onLanguage:JCL",
         "onLanguage:bms",
@@ -1154,11 +1153,6 @@
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
             },
             {
-                "key": "ctrl+alt+p",
-                "command": "cobolplugin.move2pd",
-                "when": "editorTextFocus && editorLangId == GnuCOBOL"
-            },
-            {
                 "key": "ctrl+alt+w",
                 "command": "cobolplugin.move2ws",
                 "when": "editorTextFocus && editorLangId == COBOL"
@@ -1167,11 +1161,6 @@
                 "key": "ctrl+alt+w",
                 "command": "cobolplugin.move2ws",
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
-            },
-            {
-                "key": "ctrl+alt+w",
-                "command": "cobolplugin.move2ws",
-                "when": "editorTextFocus && editorLangId == GnuCOBOL"
             },
             {
                 "key": "ctrl+alt+d",
@@ -1184,11 +1173,6 @@
                 "when": "editorTextFocus && editorLangId == ACUCOBOL"
             },
             {
-                "key": "ctrl+alt+d",
-                "command": "cobolplugin.move2dd",
-                "when": "editorTextFocus && editorLangId == GnuCOBOL"
-            },
-            {
                 "key": "ctrl+alt+.",
                 "command": "cobolplugin.move2anyforward",
                 "when": "editorTextFocus && editorLangId == COBOL"
@@ -1197,16 +1181,6 @@
                 "key": "ctrl+alt+,",
                 "command": "cobolplugin.move2anybackwards",
                 "when": "editorTextFocus && editorLangId == COBOL"
-            },
-            {
-                "key": "ctrl+alt+.",
-                "command": "cobolplugin.move2anyforward",
-                "when": "editorTextFocus && editorLangId == GnuCOBOL"
-            },
-            {
-                "key": "ctrl+alt+,",
-                "command": "cobolplugin.move2anybackwards",
-                "when": "editorTextFocus && editorLangId == GnuCOBOL"
             },
             {
                 "key": "ctrl+alt+.",
@@ -1234,19 +1208,9 @@
                 "when": "editorLangId == ACUCOBOL && !inSnippetMode"
             },
             {
-                "key": "tab",
-                "command": "cobolplugin.tab",
-                "when": "editorLangId == GnuCOBOL && !inSnippetMode"
-            },
-            {
                 "key": "shift+tab",
                 "command": "cobolplugin.revtab",
                 "when": "editorLangId == ACUCOBOL && !inSnippetMode"
-            },
-            {
-                "key": "shift+tab",
-                "command": "cobolplugin.revtab",
-                "when": "editorLangId == GnuCOBOL && !inSnippetMode"
             },
             {
                 "key": "ctrl+/",
@@ -1338,7 +1302,7 @@
             },
             {
                 "name": "mfcobol-errformat2",
-                "regexp": "^\\*+\\s+(COBCH\\d+)([USEWI])\\s+([^:]+)[^,]\\s+(.*)\\((\\d+),(\\d+),.*\\)$",
+                "regexp": "^\\*+\\s+(COB[A-Z][A-Z]\\d+)([USEWI])\\s+([^:]+)[^,]\\s+(.*)\\((\\d+),(\\d+),.*\\)$",
                 "code": 1,
                 "severity": 2,
                 "message": 3,
@@ -1348,7 +1312,7 @@
             },
             {
                 "name": "mfcobol-errformat2-copybook",
-                "regexp": "^\\*+\\s+(COBCH\\d+)([USEWI])\\s+([^:]+)[^,]+,(\\S.*)\\((\\d+),(\\d+),.*\\).*$",
+                "regexp": "^\\*+\\s+(COB[A-Z][A-Z]\\d+)([USEWI])\\s+([^:]+)[^,]+,(\\S.*)\\((\\d+),(\\d+),.*\\).*$",
                 "code": 1,
                 "severity": 2,
                 "message": 3,
@@ -1358,7 +1322,7 @@
             },
             {
                 "name": "mfcobol-errformat2-basefn",
-                "regexp": "^\\*+\\s+(COBCH\\d+)([a-zA-Z])\\s+([^:]+):\\s+[\\.\\/].*[\\/](\\S*)\\((\\d+)(\\d+)[,].*\\).*$",
+                "regexp": "^\\*+\\s+(COB[A-Z][A-Z]\\d+)([a-zA-Z])\\s+([^:]+):\\s+[\\.\\/].*[\\/](\\S*)\\((\\d+)(\\d+)[,].*\\).*$",
                 "code": 1,
                 "severity": 2,
                 "message": 3,
@@ -1368,7 +1332,7 @@
             },
             {
                 "name": "mfcobol-errformat3-absolute",
-                "regexp": "(\\/.*|[a-zA-Z]:.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COBCH\\d+)\\s+:\\s+(.*)$",
+                "regexp": "(\\/.*|[a-zA-Z]:.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COB[A-Z][A-Z]\\d+)\\s+:\\s+(.*)$",
                 "file": 1,
                 "line": 2,
                 "column": 3,
@@ -1378,7 +1342,7 @@
             },
             {
                 "name": "mfcobol-errformat3",
-                "regexp": "(.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COBCH\\d+)\\s+:\\s+(.*).*$",
+                "regexp": "(.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COB[A-Z][A-Z]\\d+)\\s+:\\s+(.*).*$",
                 "file": 1,
                 "line": 2,
                 "column": 3,
@@ -1388,7 +1352,7 @@
             },
             {
                 "name": "mfcobol-errformat3-info",
-                "regexp": "(.*)\\((\\d+),(\\d+)\\).*(information)\\s+(COBCH\\d+)\\s+:\\s+(.*).*$",
+                "regexp": "(.*)\\((\\d+),(\\d+)\\).*(information)\\s+(COB[A-Z][A-Z]\\d+)\\s+:\\s+(.*).*$",
                 "file": 1,
                 "line": 2,
                 "column": 3,
@@ -1397,7 +1361,7 @@
             },
             {
                 "name": "mfcobol-errformat3-basefn",
-                "regexp": "\\.\\..*[/\\x5c](.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COBCH\\d+)\\s+:\\s+(.*).*$",
+                "regexp": "\\.\\..*[/\\x5c](.*)\\((\\d+),(\\d+)\\).*(unrecoverable|severe|error|warning|information)\\s+(COB[A-Z][A-Z]\\d+)\\s+:\\s+(.*).*$",
                 "file": 1,
                 "line": 2,
                 "column": 3,
@@ -1407,7 +1371,7 @@
             },
             {
                 "name": "mfcobol-errformat3-info-basefn",
-                "regexp": "\\.\\..*[/\\x5c](.*)\\((\\d+),(\\d+)\\).*(information)\\s+(COBCH\\d+)\\s+:\\s+(.*).*$",
+                "regexp": "\\.\\..*[/\\x5c](.*)\\((\\d+),(\\d+)\\).*(information)\\s+(COB[A-Z][A-Z]\\d+)\\s+:\\s+(.*).*$",
                 "file": 1,
                 "line": 2,
                 "column": 3,
@@ -1473,9 +1437,7 @@
             {
                 "name": "mfcobol-msbuild",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-msbuild",
                 "source": "MSBuild"
             },
@@ -1491,20 +1453,14 @@
             {
                 "name": "mfcobol-errformat3",
                 "owner": "cobol",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat3",
                 "source": "VC"
             },
             {
                 "name": "mfcobol-errformat3-info",
                 "owner": "cobol",
-                "fileLocation": [
-                    "relative",
-                    "${workspaceFolder}"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat3-info",
                 "severity": "info",
                 "source": "VC"
@@ -1533,45 +1489,35 @@
             {
                 "name": "mfcobol-errformat2-netx-sx",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat2-netx-sx",
                 "source": "NETX/SX"
             },
             {
                 "name": "mfcobol-errformat2-copybook-netx-sx",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat2-copybook-netx-sx",
                 "source": "NETX/SX"
             },
             {
                 "name": "mfcobol-errformat3-netx-sx",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat3-netx-sx",
                 "source": "NETX/SX"
             },
             {
                 "name": "mfcobol-errformat2-copybook",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat2-copybook",
                 "source": "VC"
             },
             {
                 "name": "mfcobol-errformat2",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$mfcobol-errformat2",
                 "source": "VC"
             },
@@ -1588,18 +1534,14 @@
             {
                 "name": "cobolit-cobc",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$cobolit-cobc",
                 "source": "COBOL-IT"
             },
             {
                 "name": "cobolit-note-cobc",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$cobolit-note-cobc",
                 "severity": "info",
                 "source": "COBOL-IT"
@@ -1607,30 +1549,35 @@
             {
                 "name": "acucobol-ccbl",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$acucobol-ccbl",
                 "source": "ACUCOBOL-GT"
             },
             {
                 "name": "acucobol-warning-ccbl",
                 "owner": "cobol",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$acucobol-warning-ccbl",
                 "source": "ACUCOBOL-GT"
             },
             {
                 "name": "procobol-preprocessor",
-                "fileLocation": [
-                    "absolute"
-                ],
+                "fileLocation": "autoDetect",
                 "pattern": "$procobol-preprocessor",
                 "source": "Pro*COBOL",
                 "owner": "cobol",
                 "severity": "error"
+            }
+        ],
+        "taskDefinitions": [
+            {
+                "type": "bldScript",
+                "properties": {
+                    "arguments": {
+                        "type": "string"
+                    }
+                },
+                "when": "config.coboleditor.experimental_features"
             }
         ]
     },
@@ -1648,20 +1595,20 @@
     "devDependencies": {
         "@types/glob": "^7.1.3",
         "@types/minimatch": "^3.0.3",
-        "@types/mocha": "^8.0.3",
-        "@types/node": "^14.14.7",
-        "@types/vscode": "^1.49.0",
-        "@typescript-eslint/eslint-plugin": "^4.8.0",
-        "@typescript-eslint/parser": "^4.8.0",
+        "@types/mocha": "^8.2.0",
+        "@types/node": "^14.14.11",
+        "@types/vscode": "^1.51.0",
+        "@typescript-eslint/eslint-plugin": "^4.9.1",
+        "@typescript-eslint/parser": "^4.9.1",
         "depcheck": "^1.3.1",
-        "eslint": "^7.13.0",
+        "eslint": "^7.15.0",
         "glob": "^7.1.6",
         "mocha": "^8.2.1",
-        "ts-loader": "^8.0.10",
-        "typescript": "^4.0.5",
+        "ts-loader": "^8.0.11",
+        "typescript": "^4.1.2",
         "vsce": "^1.81.1",
         "vscode-test": "^1.4.1",
-        "webpack": "^5.4.0",
+        "webpack": "^5.10.0",
         "webpack-cli": "^4.2.0"
     },
     "dependencies": {
@@ -1673,7 +1620,7 @@
         "performance-now": "2.1.0",
         "properties-reader": "^2.1.1",
         "trie-search": "^1.3.4",
-        "typescript-string-operations": "^1.4.0"
+        "typescript-string-operations": "^1.4.1"
     },
     "extensionDependencies": []
 }
