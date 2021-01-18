@@ -32,7 +32,7 @@ export class CobolReferenceProvider implements vscode.ReferenceProvider {
 
         const workLower = word.toLocaleLowerCase();
 
-        // cache current document, interatives search to be faster
+        // cache current document, so interactive searches can be faster
         if (this.current === undefined || this.currentVersion !== document.version) {
             this.current = VSCOBOLSourceScanner.getCachedObject(document);
             if (this.current !== undefined) {
@@ -79,7 +79,7 @@ export class CobolReferenceProvider implements vscode.ReferenceProvider {
                 for (let trpos = 0; trpos < targetRefs.length; trpos++) {
                     const tref = targetRefs[trpos];
                     const uiref = vscode.Uri.file(sourceRefs.filenames[tref.fileIdentifer]);
-                    list.push(new vscode.Location(uiref, new vscode.Position(tref.line, tref.columnn)));
+                    list.push(new vscode.Location(uiref, new vscode.Position(tref.line, tref.column)));
                 }
             }
         }
@@ -90,7 +90,7 @@ export class CobolReferenceProvider implements vscode.ReferenceProvider {
                 for (let trpos = 0; trpos < targetRefs.length; trpos++) {
                     const tref = targetRefs[trpos];
                     const uiref = vscode.Uri.file(sourceRefs.filenames[tref.fileIdentifer]);
-                    list.push(new vscode.Location(uiref, new vscode.Position(tref.line, tref.columnn)));
+                    list.push(new vscode.Location(uiref, new vscode.Position(tref.line, tref.column)));
                 }
             }
         }

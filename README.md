@@ -437,47 +437,6 @@ The hint token can be configured by the ```coboleditor.scan_comment_copybook_tok
 
 It is recommended that the token name remain consistent in your source, otherwise it will make it hard for observers of your source to understand the code.
 
-## Complementary extensions
-
-### [ToDo tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) by Gruntfuggly
-
-Although this extension does not understand comments in COBOL source files, it can be made to by adding the following user setting:
-
-```json
-{
-    "todo-tree.tree.flat": false,
-    "todo-tree.tree.expanded": true,
-    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|\\*>|^......\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
-    "todo-tree.general.tags": [
-        "TODO",
-        "FIXME",
-        "!FIXME",
-        "CHANGED",
-        "BUG",
-        "NOTE"
-    ],
-    "todo-tree.tree.filterCaseSensitive": true,
-    "todo-tree.highlights.customHighlight": {
-        "FIXME": {
-            "icon": "flame",
-            "iconColour": "#A188FF",
-        },
-        "NOTE": {
-            "iconColour:" : "blue"
-        },
-        "TODO": {
-            "iconColour:" : "cyan"
-        },
-        "CHANGED": {
-            "iconColour:" : "yellow"
-        },
-        "BUG": {
-            "icon": "bug"
-        }
-    }
-}
-```
-
 
 ## coboleditor.fileformat
 
@@ -545,11 +504,88 @@ The metadata cache does not have to be created on workspace startup but can be c
 
 The command "COBOL: Clear metadata" can be used to remove the on-disk cache.
 
+
 ## Tips
 
 - If you find you are not getting any symbols in the outline view or the peek/goto definition functionality does not work, please check the ``Output->COBOL`` panel as it may give you a reason for this.
 
    For example the editor line limit has been surpassed or the file fails to be identified as a COBOL source file.
+
+ - The colors in the editor can be changed on a per theme basis, for example:
+
+```json
+"editor.tokenColorCustomizations": {
+        "[Monokai]": {
+            "comments": "#229977"
+        }
+    }
+```
+
+Where *comments* is a token name, standard tokens can be found in the [textmate documentation](https://macromates.com/manual/en/language_grammars).
+
+Useful tokens that are often changed are: comment.line.cobol.newpage, keyword.operator.
+
+## Complementary extensions
+
+### [COBOL Language Dictionary - Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=bitlang.code-spell-checker-cobol)
+
+Spell checking code is helpful but without specific support for the COBOL language it can be a painful experience, so in order to make it easier. I have produced a spell checker extension that has a the standard COBOL reserved words and keywords from various dialects such a Micro Focus COBOL and IBM Enterprise COBOL.
+
+Spell checking can be enabled/disabled in your source code by using:
+```cobol
+      * spell-checker: disable
+      * spell-checker: enable
+```
+
+You can also ignore words in the code, for example:
+```cobol
+      * cSpell:ignoreWords TPCC, ridfld, dfhresp
+```
+
+Lastly, you use a regular expression, for example, to ignore words that contain a '-', you could use:
+
+```cobol
+      * cSpell:ignoreRegExp /\w*-\w*/
+```
+
+### [ToDo tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) by Gruntfuggly
+
+Although this extension does not understand comments in COBOL source files, it can be made to by adding the following user setting:
+
+```json
+{
+    "todo-tree.tree.flat": false,
+    "todo-tree.tree.expanded": true,
+    "todo-tree.regex.regex": "((//|#|<!--|;|/\\*|\\*>|^......\\*)\\s*($TAGS)|^\\s*- \\[ \\])",
+    "todo-tree.general.tags": [
+        "TODO",
+        "FIXME",
+        "!FIXME",
+        "CHANGED",
+        "BUG",
+        "NOTE"
+    ],
+    "todo-tree.tree.filterCaseSensitive": true,
+    "todo-tree.highlights.customHighlight": {
+        "FIXME": {
+            "icon": "flame",
+            "iconColour": "#A188FF",
+        },
+        "NOTE": {
+            "iconColour:" : "blue"
+        },
+        "TODO": {
+            "iconColour:" : "cyan"
+        },
+        "CHANGED": {
+            "iconColour:" : "yellow"
+        },
+        "BUG": {
+            "icon": "bug"
+        }
+    }
+}
+```
 
 ## Online resources
 
@@ -576,7 +612,6 @@ The command "COBOL: Clear metadata" can be used to remove the on-disk cache.
 
  - [ALT] + [SHIFT] + [C]: Change to COBOL Syntax (default)
  - [ALT] + [SHIFT] + [A]: Change to ACUCOBOL-GT Syntax
- - [ALT] + [SHIFT] + [O]: Change to OpenCOBOL Syntax
  - [ALT] + [SHIFT] + [M]: Toggle margins (overrides user/workspace settings)
 
 ## Contributors
@@ -586,3 +621,5 @@ I would like to thank the follow contributors for providing patches, fixes, kind
  - Ted John of Berkshire, UK
  - Kevin Abel of Lincoln, NE, USA
  - Simon Sobisch of Germany
+
+ NOTE: Some of the above contributions have now been moved into the GnuCOBOL extension.

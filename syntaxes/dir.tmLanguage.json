@@ -1,5 +1,5 @@
 {
-  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2020 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/main/syntaxes/dir.tmLanguage.json",
+  "_copyright": "The MIT License (MIT)\nCopyright (c) 2015-2021 spgennard\nSource: https://github.com/spgennard/vscode_cobol/blob/main/syntaxes/dir.tmLanguage.json",
   "name": "dir",
   "fileTypes": [
     "dir"
@@ -11,7 +11,7 @@
     },
     {
       "match": "(\\s*)(?i:ILOBJECTIFY|TRICKLE|CONVERTRET|IDYSRCPATH|SPZERO)",
-      "name": "invalid.illegal.deprictated.dir"
+      "name": "invalid.illegal.depreciated.dir"
     },
     {
       "match": "(\\(.*\\))",

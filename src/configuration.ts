@@ -1,7 +1,7 @@
 'use strict';
 
 import { workspace } from 'vscode';
-import { ICOBOLSettings, COBOLSettings, outlineFlag } from './iconfiguration';
+import { ICOBOLSettings, COBOLSettings, outlineFlag, formatOnReturn } from './iconfiguration';
 import * as path from 'path';
 import { isDirectory } from './extension';
 import { CacheDirectoryStrategy } from './externalfeatures';
@@ -45,6 +45,7 @@ export class VSCOBOLConfiguration {
         vsconfig.linter_house_standards = getBoolean("linter_house_standards", true);
         vsconfig.linter_house_standards_rules = getlinter_house_standards_rules();
         vsconfig.linter_mark_as_information = getBoolean("linter_mark_as_information", true);
+        vsconfig.linter_ignore_section_before_entry = getBoolean("linter_ignore_section_before_entry", true);
         vsconfig.ignore_unsafe_extensions = getBoolean("ignore_unsafe_extensions", false);
         vsconfig.coboldoc_workspace_folder = getCoboldoc_workspace_folder();
         vsconfig.scan_comments_for_hints = getBoolean("scan_comments_for_hints", false);
@@ -58,6 +59,8 @@ export class VSCOBOLConfiguration {
         vsconfig.sourceview_include_pli_files = getBoolean("sourceview_include_pli_files", true);
         vsconfig.sourceview_include_doc_files = getBoolean("sourceview_include_doc_files", true);
         vsconfig.sourceview_include_script_files = getBoolean("sourceview_include_script_files", true);
+        vsconfig.format_on_return = workspace.getConfiguration('coboleditor').get<formatOnReturn>("format_on_return",formatOnReturn.Off);
+
         return vsconfig;
     }
 

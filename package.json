@@ -2,21 +2,20 @@
     "name": "cobol",
     "displayName": "COBOL",
     "description": "IntelliSense, highlighting, snippets and more for COBOL, JCL, PL/I & DIR and HLASM",
-    "version": "6.11.9",
+    "version": "7.0.10",
     "publisher": "bitlang",
     "keywords": [
         "cobol",
         "jcl",
         "pl/i",
         "pli",
-        "mvs",
         "mfcobol",
+        "mvs",
         "visualcobol",
         "serverexpress",
         "ocds",
         "cobol-it",
         "cobolit",
-        "entcobol",
         "ibmcobol",
         "bms",
         "mfu"
@@ -46,7 +45,7 @@
         "onLanguage:cobol",
         "onLanguage:COBOL",
         "onLanguage:ACUCOBOL",
-        "onLanguage:entcobol",
+        "onLanguage:mfcobol",
         "onLanguage:JCL",
         "onLanguage:bms",
         "onLanguage:hlasm",
@@ -82,6 +81,9 @@
         "onCommand:cobolplugin.makePerformTargetsCamelCase",
         "onCommand:cobolplugin.resequenceColumnNumbers",
         "view:flat-source-view",
+        "workspaceContains:.vscode_cobol",
+        "workspaceContains:bld.bat",
+        "workspaceContains:bld.sh",
         "workspaceContains:**/.cobol",
         "workspaceContains:**/.cob",
         "workspaceContains:**/.cbl",
@@ -205,11 +207,13 @@
                     "uniqueItems": true
                 },
                 "coboleditor.ignorecolumn_b_onwards": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "boolean",
                     "title": "include column 72 onwards in parsing",
                     "default": true
                 },
                 "coboleditor.copybooks_nested": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "boolean",
                     "markdownDescription": "nest copybooks in outline view (restart required)",
                     "title": "nest copybooks in outline view (restart require)",
@@ -219,7 +223,7 @@
                     "type": "boolean",
                     "markdownDescription": "fuzzy variable search (legacy compatibility)",
                     "title": "fuzzy variable search",
-                    "deprecationMessage": "Deprecated: functionality may be removed",
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "default": false
                 },
                 "coboleditor.enable_data_provider": {
@@ -229,6 +233,7 @@
                     "default": true
                 },
                 "coboleditor.cache_metadata": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "enum": [
                         "workspace",
                         "user_defined_directory",
@@ -244,29 +249,34 @@
                     ]
                 },
                 "coboleditor.cache_metadata_user_directory": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "string",
                     "markdownDescription": "User specific directory for the workspace metadata cache (directory has to exist)",
                     "title": "User specific directory for the workspace metadata cache (directory has to exist)",
                     "default": ""
                 },
                 "coboleditor.cache_metadata_time_limit": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "number",
                     "markdownDescription": "Limited the time to process the cache (on startup) in ms",
                     "title": "Limited the time to process the cache (on startup)",
                     "default": 30000
                 },
                 "coboleditor.cache_metadata_max_directory_scan_depth": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "number",
                     "markdownDescription": "Limited the depth of the metadata cache directory scan",
                     "title": "Limited the depth of the metadata cache directory scan",
                     "default": 32
                 },
                 "coboleditor.cache_metadata_show_progress_messages": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "boolean",
                     "markdownDescription": "Show log message during meta data processing",
                     "default": false
                 },
                 "coboleditor.margin": {
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "type": "boolean",
                     "title": "apply margin shading",
                     "default": false
@@ -328,7 +338,7 @@
                 },
                 "coboleditor.experimental_features": {
                     "type": "boolean",
-                    "title": "Experimential features",
+                    "title": "Experimental features",
                     "default": false
                 },
                 "coboleditor.enable_tabstop": {
@@ -387,8 +397,8 @@
                 },
                 "coboleditor.sourceview": {
                     "type": "boolean",
-                    "title": "Enable experimential explorer source view",
-                    "description": "Enable experimential explorer source view",
+                    "title": "Enable experimental explorer source view",
+                    "description": "Enable experimental explorer source view",
                     "default": false
                 },
                 "coboleditor.sourceview_include_jcl_files": {
@@ -474,12 +484,13 @@
                     "type": "boolean",
                     "title": "Process metadata cache on startup",
                     "description": "Process metadata cache on extension load (default false)",
+                    "deprecationMessage": "This setting is depreciated and be removed in future releases",
                     "default": false
                 },
                 "coboleditor.parse_copybooks_for_references": {
                     "type": "boolean",
                     "title": "Parse copybook for reference",
-                    "description": "Parse copybook for reference [WARNING: use with care] (default false)",
+                    "description": "Parse copybook for reference (default false)",
                     "default": false
                 },
                 "coboleditor.workspacefolders_order": {
@@ -502,6 +513,12 @@
                     "title": "Enable house standards rules",
                     "description": "Enable house standards rules",
                     "default": false
+                },
+                "coboleditor.linter_ignore_section_before_entry": {
+                    "type": "boolean",
+                    "title": "Do not warn on unused section before entry-point",
+                    "description": "Do not issue a warning if a unused section occurs before a entry-point, as this is often used to stop code trickling through to the next statements.",
+                    "default": true
                 },
                 "coboleditor.linter_house_standards_rules": {
                     "type": "array",
@@ -547,7 +564,18 @@
                 "coboleditor.process_metadata_cache_on_file_save": {
                     "type": "boolean",
                     "title": "Process metadata on file save",
+                    "deprecationMessage": "This setting is depreciated and may be removed in future releases",
                     "default": false
+                },
+                "coboleditor.format_on_return": {
+                    "enum": [
+                        "camelcase",
+                        "uppercase",
+                        "off"
+                    ],
+                    "default": "off",
+                    "markdownDescription": "Format line on return key (camelcase or uppercase)",
+                    "title": "Format line on return key (camelcase or uppercase)"
                 }
             }
         },
@@ -748,15 +776,6 @@
                 "configuration": "./pli.configuration.json"
             },
             {
-                "id": "entcobol",
-                "aliases": [
-                    "Enterprise COBOL for z/OS",
-                    "enterprisecobol"
-                ],
-                "extensions": [],
-                "configuration": "./enterprisecobol.configuration.json"
-            },
-            {
                 "id": "bms",
                 "extensions": [
                     ".bms"
@@ -869,11 +888,6 @@
                 "language": "pli",
                 "scopeName": "source.pli",
                 "path": "./syntaxes/PLI.tmLanguage.json"
-            },
-            {
-                "language": "entcobol",
-                "scopeName": "source.entcobol",
-                "path": "./syntaxes/enterprisecobol.tmLanguage.json"
             },
             {
                 "language": "bms",
@@ -1571,7 +1585,7 @@
         ],
         "taskDefinitions": [
             {
-                "type": "bldScript",
+                "type": "COBOLBuildScript",
                 "properties": {
                     "arguments": {
                         "type": "string"
@@ -1620,7 +1634,8 @@
         "performance-now": "2.1.0",
         "properties-reader": "^2.1.1",
         "trie-search": "^1.3.4",
-        "typescript-string-operations": "^1.4.1"
+        "typescript-string-operations": "^1.4.1",
+        "temp-dir": "^2.0.0"
     },
     "extensionDependencies": []
 }

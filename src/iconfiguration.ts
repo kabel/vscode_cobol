@@ -7,6 +7,12 @@ export enum outlineFlag {
     Skeleton = "skeleton"
 }
 
+export enum formatOnReturn {
+    Off = "off",
+    CamelCase = "camelcase",
+    UpperCase = "uppercase"
+}
+
 export interface ICOBOLSettings {
     experimental_features: boolean;
     enable_tabstop: boolean;
@@ -40,6 +46,8 @@ export interface ICOBOLSettings {
     linter_unused_paragraphs_or_sections: boolean;
     linter_house_standards: boolean;
     linter_house_standards_rules: string[];
+    linter_ignore_section_before_entry: boolean;
+
     ignore_unsafe_extensions: boolean;
     coboldoc_workspace_folder: string;
     scan_comments_for_hints:boolean;
@@ -54,6 +62,8 @@ export interface ICOBOLSettings {
     sourceview_include_doc_files: boolean;
     sourceview_include_script_files: boolean;
 
+    format_constants_to_uppercase: boolean;
+    format_on_return:formatOnReturn;
     editor_maxTokenizationLineLength: number;
     init_required: boolean;
 }
@@ -90,6 +100,7 @@ export class COBOLSettings implements ICOBOLSettings {
     public linter_unused_paragraphs_or_sections: boolean;
     public linter_house_standards: boolean;
     public linter_house_standards_rules: string[];
+    public linter_ignore_section_before_entry: boolean;
     public ignore_unsafe_extensions: boolean;
     public coboldoc_workspace_folder: string;
     public program_extensions: string[];
@@ -104,8 +115,9 @@ export class COBOLSettings implements ICOBOLSettings {
     public sourceview_include_pli_files: boolean;
     public sourceview_include_doc_files: boolean;
     public sourceview_include_script_files: boolean;
-
+    public format_on_return:formatOnReturn;
     public editor_maxTokenizationLineLength: number;
+    public format_constants_to_uppercase: boolean;
 
     public init_required = true;
 
@@ -131,7 +143,7 @@ export class COBOLSettings implements ICOBOLSettings {
         this.intellisense_include_camelcase = false;
         this.intellisense_include_uppercase = false;
         this.intellisense_include_lowercase = false;
-        this.intellisense_item_limit = 0;
+        this.intellisense_item_limit = 30;
         this.process_metadata_cache_on_start = false;
         this.cache_metadata = CacheDirectoryStrategy.Off;
         this.cache_metadata_time_limit = 60000;
@@ -156,5 +168,8 @@ export class COBOLSettings implements ICOBOLSettings {
         this.sourceview_include_pli_files = true;
         this.sourceview_include_doc_files = true;
         this.sourceview_include_script_files = true;
+        this.linter_ignore_section_before_entry = true;
+        this.format_on_return = formatOnReturn.Off;
+        this.format_constants_to_uppercase = true;
     }
 }
