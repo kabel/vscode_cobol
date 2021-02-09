@@ -4,6 +4,60 @@
 Changelog for spgennardvscode_cobol.
 
 
+## 7.1.1
+ 
+  
+   
+### GitHub [#266](https://github.com/spgennard/vscode_cobol/issues/266) paragraphs missing in outline  
+   
+   
+  
+
+  
+**paragraphs missing in outline Fix #266**
+
+
+ * - parsing of comment lines via the scanner internals was changing
+
+ * the behavour on multi-line scanning
+
+* [e75e75ce1104748](https://github.com/spgennard/vscode_cobol/commit/e75e75ce1104748) *2021-02-02 23:46:28*
+
+  
+
+ 
+  
+
+  
+**Update CHANGELOG.md**
+
+
+* [096e69f0584f0b6](https://github.com/spgennard/vscode_cobol/commit/096e69f0584f0b6) *2021-02-01 22:30:28*
+
+  
+
+ 
+
+## 7.1.0
+ 
+  
+
+  
+**introduce cobolit as a seperate language**
+
+
+* [9c0f1b27f819540](https://github.com/spgennard/vscode_cobol/commit/9c0f1b27f819540) *2021-02-01 22:29:39*
+
+  
+**Update CHANGELOG.md**
+
+
+* [ff3fc85af4e332c](https://github.com/spgennard/vscode_cobol/commit/ff3fc85af4e332c) *2021-01-22 23:58:31*
+
+  
+
+ 
+
 ## 7.0.13
  
   
